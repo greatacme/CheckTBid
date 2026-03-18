@@ -1,0 +1,20 @@
+CheckTbid — 프로젝트 명세
+
+개요
+  T사의 입찰공고 사이트를 주기적으로 크롤링하여 신규 입찰공고가 등록되었는 지 확인하고, 신규 입찰공고가 있을 경우 이메일로 통보
+  GitHub: https://github.com/greatacme/CheckTBid
+
+기능
+  1. T사 입찰 페이지 접속
+    https://bid.tmoney.co.kr/index.tms
+
+  2. Id/PW 입력
+
+  3. 입찰공고 게시판 이동
+    https://bid.tmoney.co.kr/bidding/bidding_list.tms
+
+  4. 신규 입찰 공지 등록 여부 판단하고 신규 건 존재 시 메일 송부  
+    로컬 메일 서버 사용하여 jhypark@lgcns.com에 전송
+  
+실행 주기  / 방법
+  윈도11 태스크매니저에 등록하여 매일 08:30 실행
