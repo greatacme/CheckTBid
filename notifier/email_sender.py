@@ -61,13 +61,13 @@ def send_new_bids(bids: List[BidItem]):
     msg = MIMEMultipart("alternative")
     msg["Subject"] = subject
     msg["From"] = config.SENDER_EMAIL
-    msg["To"] = config.NOTIFY_EMAIL
+    msg["To"] = ", ".join(config.NOTIFY_EMAILS)
     msg.attach(MIMEText(html_body, "html", "utf-8"))
 
     try:
         with smtplib.SMTP(config.SMTP_HOST, config.SMTP_PORT, timeout=10) as smtp:
-            smtp.sendmail(config.SENDER_EMAIL, [config.NOTIFY_EMAIL], msg.as_string())
-        logger.info("이메일 발송 완료 → %s", config.NOTIFY_EMAIL)
+            smtp.sendmail(config.SENDER_EMAIL, config.NOTIFY_EMAILS, msg.as_string())
+        logger.info("이메일 발송 완료 → %s", config.NOTIFY_EMAILS)
     except Exception as e:
         logger.error("이메일 발송 실패: %s", e)
         raise
@@ -78,10 +78,10 @@ def send_error(error_msg: str):
     msg = MIMEText(f"CheckTBid 오류 발생:\n\n{error_msg}", "plain", "utf-8")
     msg["Subject"] = f"[CheckTBid] 오류 발생 - {datetime.now().strftime('%Y-%m-%d %H:%M')}"
     msg["From"] = config.SENDER_EMAIL
-    msg["To"] = config.NOTIFY_EMAIL
+    msg["To"] = ", ".join(config.NOTIFY_EMAILS)
 
     try:
         with smtplib.SMTP(config.SMTP_HOST, config.SMTP_PORT, timeout=10) as smtp:
-            smtp.sendmail(config.SENDER_EMAIL, [config.NOTIFY_EMAIL], msg.as_string())
+            smtp.sendmail(config.SENDER_EMAIL, config.NOTIFY_EMAILS, msg.as_string())
     except Exception as e:
         logger.error("오류 알림 이메일 발송 실패: %s", e)
