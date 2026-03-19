@@ -88,6 +88,6 @@ class BidSession:
         return True
 
     def get_bid_list_html(self, page_no: int = 1) -> str:
-        self.page.evaluate(f"exeuteAction.goPage('{page_no}', '1')")
-        self.page.wait_for_load_state("networkidle")
+        with self.page.expect_navigation(wait_until="networkidle"):
+            self.page.evaluate(f"exeuteAction.goPage('{page_no}', '1')")
         return self.page.content()
