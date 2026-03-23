@@ -42,7 +42,7 @@ CheckTBid/
 │   └── bid_store.py         # SQLite 신규 공고 판별 및 저장
 ├── notifier/
 │   └── email_sender.py      # HTML 이메일 발송
-├── logs/                    # 실행 로그 (git 제외)
+├── logs/                    # 실행 로그 (app_YYYY-MM-DD.log, git 제외)
 └── data/
     └── bids.db              # SQLite DB (git 제외)
 ```

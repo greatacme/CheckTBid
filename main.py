@@ -1,15 +1,16 @@
 import logging
 import sys
 import traceback
+from datetime import date
 from pathlib import Path
 
-# 로그 설정
+# 로그 설정 (일자별 파일)
 Path("logs").mkdir(exist_ok=True)
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(name)s - %(message)s",
     handlers=[
-        logging.FileHandler("logs/app.log", encoding="utf-8"),
+        logging.FileHandler(f"logs/app_{date.today()}.log", encoding="utf-8"),
         logging.StreamHandler(sys.stdout),
     ],
 )
